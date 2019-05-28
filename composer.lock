@@ -1,0 +1,44 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "820ba6fe63d602ddafcc34db968997c6",
+    "packages": [
+        {
+            "name": "dusan/php-mvc-file",
+            "version": "v1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/malusev998/PhpMvc-File.git",
+                "reference": "d99668cef6784c746824d7fc1970f62a3b7b5353"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dusan\\PhpMvc\\File\\": "src/"
+                }
+            },
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Dusan Malusev",
+                    "email": "dusan.998@outlook.com"
+                }
+            ],
+            "description": "Extension to SplFileObject",
+            "time": "2019-05-28T19:14:34+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}

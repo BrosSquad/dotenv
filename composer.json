@@ -7,6 +7,29 @@
             "email": "dusan.998@outlook.com"
         }
     ],
-    "require": {},
-    "license": "GPL-2.0"
+    "autoload": {
+        "files": ["src/functions.php"],
+        "psr-4": {
+            "Dusan\\PhpMvc\\Env\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "files": ["src/functions.php"],
+        "psr-4": {
+            "Dusan\\PhpMvc\\Tests\\Env\\": "tests/"
+        }
+    },
+    "type": "library",
+    "minimum-stability": "stable",
+    "require": {
+        "dusan/php-mvc-file": "1.0"
+    },
+    "license": "GPL-2.0",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/malusev998/PhpMvc-File.git",
+            "branch": "master"
+        }
+    ]
 }

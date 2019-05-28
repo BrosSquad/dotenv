@@ -11,7 +11,7 @@ use Dusan\PhpMvc\Env\Exceptions\EnvVariableNotFound;
 use Dusan\PhpMvc\Env\Tokens;
 use Dusan\PhpMvc\Exceptions\FileNotFoundException;
 use Dusan\PhpMvc\Exceptions\NullPointerException;
-use Dusan\PhpMvc\Storage\File;
+use Dusan\PhpMvc\File\File;
 use Exception;
 
 class EnvParserImpl implements Tokens, EnvParser
@@ -103,7 +103,14 @@ class EnvParserImpl implements Tokens, EnvParser
         $key = $startingChar;
         while (($c = $this->handler->fgetc()) !== self::EQUALS) {
             // Ignoring every white space
-            if ($c === self::SPACE) continue;
+            if ($c === self::SPACE) {
+                while(($c === $this->handler->fgetc()) === self::SPACE) {
+                    continue;
+                }
+                if(($c = $this->handler->fgetc()) !== self::EQUALS) {
+                    throw new DotEnvSyntaxError('Spaces are now allowed in env variable name, LINE = ' . $this->handler->key());
+                }
+            };
             if ($c === self::CARRIAGE_RETURN || $c === self::NEW_LINE || $c === self::COMMENT)
                 throw new DotEnvSyntaxError('Error on line ' . $this->handler->key());
             $key .= $c;
