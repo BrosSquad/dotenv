@@ -1,0 +1,12 @@
+{
+    "name": "dusan/env",
+    "description": "Env Parser for PhpMvc Framework",
+    "authors": [
+        {
+            "name": "Dusan Malusev",
+            "email": "dusan.998@outlook.com"
+        }
+    ],
+    "require": {},
+    "license": "GPL-2.0"
+}
