@@ -1,9 +1,14 @@
 <?php
-
+declare(strict_types=1);
 
 namespace Dusan\PhpMvc\Env;
 
-
+/**
+ * ENV Tokens
+ * This interfaces holds the tokens used in lexical process
+ *
+ * @package Dusan\PhpMvc\Env
+ */
 interface Tokens
 {
     const EQUALS = '=';

@@ -5,18 +5,16 @@ namespace Dusan\PhpMvc\Tests\Env;
 
 
 use Dusan\PhpMvc\Env\Exceptions\DotEnvSyntaxError;
-use Dusan\PhpMvc\Env\Impl\EnvParserImpl;
-use Dusan\PhpMvc\Exceptions\NullPointerException;
-use Dusan\PhpMvc\Tests\PhpMvcTestCase;
+use Dusan\PhpMvc\Env\EnvParser;
 use Exception;
+use PHPUnit\Framework\TestCase;
 
-class EnvParserTest extends PhpMvcTestCase
+class EnvParserTest extends TestCase
 {
     public function test_env_parser() {
 
         try {
-            $parser = new EnvParserImpl();
-            $parser->setFile(__DIR__ . '/.env');
+            $parser = new EnvParser(__DIR__ . '/.env');
             $parser->parse(true);
             $array = $parser->getEnvs();
             $this->assertIsArray($array);
@@ -24,7 +22,7 @@ class EnvParserTest extends PhpMvcTestCase
             $this->assertArrayHasKey('DB_NAME', $array);
             $this->assertArrayHasKey('MULTI_LINE', $array);
             $this->assertArrayHasKey('COMMENTS_AT_END_OF_VALUE', $array);
-            $this->assertArrayHasKey('NAMEANDVAlUE', $array);
+            $this->assertArrayHasKey('NAME_AND_VAlUE', $array);
             $this->assertEquals('Test', $array['APP_NAME']);
             $this->assertEquals('test', $array['DB_NAME']);
             $this->assertEquals('Name', $array['COMMENTS_AT_END_OF_VALUE']);
@@ -40,23 +38,20 @@ class EnvParserTest extends PhpMvcTestCase
 
     public function test_env_with_error() {
         $this->expectException(DotEnvSyntaxError::class);
-        $parser = new EnvParserImpl();
-        $parser->setFile(__DIR__ . '/.env-error');
+        $parser = new EnvParser(__DIR__ . '/.env-error');
         $parser->parse();
     }
 
-    public function test_not_calling_setFile_method() {
-        $this->expectException(NullPointerException::class);
-        $this->expectExceptionMessage('setFile method must be called before the parse');
-        $parser = new EnvParserImpl();
+    public function test_env_with_space_error_in_variable_name() {
+        $this->expectException(DotEnvSyntaxError::class);
+        $parser = new EnvParser(__DIR__ . '/.env-error');
         $parser->parse();
     }
 
     public function test_interpolation() {
         $expected = 'Test is Interpolated';
         try {
-            $parser = new EnvParserImpl();
-            $parser->setFile(__DIR__ . '/.env.interpolation');
+            $parser = new EnvParser(__DIR__ . '/.env.interpolation');
             $parser->parse();
             $envs = $parser->getEnvs();
             $this->assertIsArray($envs);
