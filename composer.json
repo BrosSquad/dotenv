@@ -1,5 +1,5 @@
 {
-    "name": "dusan/env",
+    "name": "dusan/php-mvc-dotenv",
     "description": "Env Parser for PhpMvc Framework",
     "authors": [
         {
