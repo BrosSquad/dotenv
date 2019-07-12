@@ -127,9 +127,7 @@ class EnvParser implements Tokens, EnvParserInterface
         // Trimming the leading spaces of the value
         while (($c = $this->handler->fgetc()) === self::SPACE) continue;
         $this->handler->fseek($this->handler->ftell() - 1);
-//        if (($c = $this->handler->fgetc()) === self::CARRIAGE_RETURN || ($c = $this->handler->fgetc()) === self::NEW_LINE) {
-//            return $value;
-//        }
+
         // Handling Multiline values
         if ($c === self::MULTI_LINE_START) {
             $this->handler->fseek($this->handler->ftell() + 1);
@@ -141,25 +139,20 @@ class EnvParser implements Tokens, EnvParserInterface
                     $value .= $c;
                 }
             }
-        } else {
-            // Current value of $c must be appended first in non multiline value
-//            if($c === self::CARRIAGE_RETURN) return $value;
-//            if($c === self::NEW_LINE) return $value;
-//            $value .= $c;
-
-            // Single line values in env
-            while (($c = $this->handler->fgetc()) !== false) {
-                if($c === self::CARRIAGE_RETURN) break;
-                if($c === self::NEW_LINE) break;
-                // Every space character will be ignored
-                if ($c === self::SPACE) continue;
-                // If comment is found at the end of value it will be ignored
-                if ($c === self::COMMENT)
-                    // Just moving the file pointer to the \r or \n
-                    while (($c = $this->handler->fgetc()) !== false && $c !== self::NEW_LINE) continue;
-                // Appending the read value to the temporary handler
-                else $value .= $c;
-            }
+            return $value;
+        }
+        // Single line
+        while (($c = $this->handler->fgetc()) !== false) {
+            if($c === self::CARRIAGE_RETURN) break;
+            if($c === self::NEW_LINE) break;
+            // Every space character will be ignored
+            if ($c === self::SPACE) continue;
+            // If comment is found at the end of value it will be ignored
+            if ($c === self::COMMENT)
+                // Just moving the file pointer to the \r or \n
+                while (($c = $this->handler->fgetc()) !== false && $c !== self::NEW_LINE) continue;
+            // Appending the read value to the temporary handler
+            else $value .= $c;
         }
         return $value;
     }
