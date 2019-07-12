@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51a56bd7-56f5-4adf-9de8-42b1220c4f36" name="Default Changelist" comment="" />
+    <list default="true" id="51a56bd7-56f5-4adf-9de8-42b1220c4f36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/dusan.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.phpunit.result.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.phpunit.result.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/EnvParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnvParser.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/EnvTest/.env" beforeDir="false" afterPath="$PROJECT_DIR$/tests/EnvTest/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,47 +28,13 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="62" selection-start-line="62" selection-end-line="62" />
+            <state relative-caret-position="441">
+              <caret line="31" column="38" lean-forward="true" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
               <folding>
-                <element signature="e#206#1330#0#PHP" expanded="true" />
+                <element signature="e#40#86#0#PHP" expanded="true" />
                 <element signature="e#1336#1527#0#PHP" expanded="true" />
+                <element signature="e#1753#2256#0#PHP" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env.space.error">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/EnvParser.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="364">
-              <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
-              <folding>
-                <element signature="e#808#1239#0#PHP" expanded="true" />
-                <element signature="e#2343#3180#0#PHP" expanded="true" />
-                <element signature="e#3342#5070#0#PHP" expanded="true" />
-                <element signature="e#5206#5531#0#PHP" expanded="true" />
-                <element signature="e#6424#6496#0#PHP" expanded="true" />
-                <element signature="e#6502#6604#0#PHP" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
             </state>
           </provider>
         </entry>
@@ -67,8 +42,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            <state relative-caret-position="251">
+              <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/EnvParser.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="283">
+              <caret line="163" column="42" selection-start-line="163" selection-start-column="42" selection-end-line="163" selection-end-column="42" />
+              <folding>
+                <element signature="e#58#104#0#PHP" expanded="true" />
+                <element signature="e#808#1239#0#PHP" expanded="true" />
+                <element signature="e#1435#2113#0#PHP" expanded="true" />
+                <element signature="e#2286#3411#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -81,18 +71,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/composer.json" />
         <option value="$PROJECT_DIR$/src/SetFile.php" />
         <option value="$PROJECT_DIR$/src/Tokens.php" />
         <option value="$PROJECT_DIR$/src/Impl/EnvParserImpl.php" />
         <option value="$PROJECT_DIR$/src/Impl/EnvParserImplInterface.php" />
         <option value="$PROJECT_DIR$/src/EnvParserImplInterface.php" />
-        <option value="$PROJECT_DIR$/tests/EnvTest/.env" />
         <option value="$PROJECT_DIR$/tests/EnvTest/.env.interpolation" />
-        <option value="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" />
         <option value="$PROJECT_DIR$/tests/EnvTest/.env-error" />
         <option value="$PROJECT_DIR$/tests/EnvTest/.env.space.error" />
         <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.php" />
+        <option value="$PROJECT_DIR$/composer.json" />
+        <option value="$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php" />
+        <option value="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" />
+        <option value="$PROJECT_DIR$/tests/EnvTest/.env" />
         <option value="$PROJECT_DIR$/src/EnvParser.php" />
       </list>
     </option>
@@ -164,6 +155,12 @@
             <path>
               <item name="PhpMvc-DotEnv" type="b2602c69:ProjectViewProjectNode" />
               <item name="PhpMvc-DotEnv" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Exceptions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="PhpMvc-DotEnv" type="b2602c69:ProjectViewProjectNode" />
+              <item name="PhpMvc-DotEnv" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -191,6 +188,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="com.jetbrains.php.lang.actions.generation.PhpGenerateFieldAccessorHandlerBase$MyMemberChooser.fluent.setters.last.selected" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -212,7 +210,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.EnvParserTest.test_interpolation (1)">
+  <component name="RunManager" selected="PHPUnit.EnvParserTest.test_env_parser (1)">
     <configuration name="EnvParserTest (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Dusan\DotEnv\Tests\EnvParserTest" file="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" scope="Class" />
       <method v="2" />
@@ -234,10 +232,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.EnvParserTest.test_env_parser (1)" />
         <item itemvalue="PHPUnit.EnvParserTest.test_interpolation (1)" />
         <item itemvalue="PHPUnit.EnvParserTest (1)" />
         <item itemvalue="PHP Script.scratch.php" />
-        <item itemvalue="PHPUnit.EnvParserTest.test_env_parser (1)" />
         <item itemvalue="PHPUnit.EnvParserTest.test_interpolation" />
       </list>
     </recent_temporary>
@@ -254,44 +252,44 @@
       <updated>1559597724028</updated>
       <workItem from="1559597725494" duration="2363000" />
       <workItem from="1559602585622" duration="39000" />
-      <workItem from="1562931971079" duration="2036000" />
+      <workItem from="1562931971079" duration="6647000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 14h 09m 57s.xml">
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 55m 24s.xml">
       <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 14h 10m 41s.xml">
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 55m 40s.xml">
       <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_(1) - 2019.07.12 at 14h 11m 03s.xml">
-      <configuration name="EnvParserTest (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 55m 49s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_(1) - 2019.07.12 at 14h 14m 30s.xml">
-      <configuration name="EnvParserTest (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 56m 06s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_(1) - 2019.07.12 at 14h 16m 05s.xml">
-      <configuration name="EnvParserTest (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 56m 15s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_(1) - 2019.07.12 at 14h 16m 35s.xml">
-      <configuration name="EnvParserTest (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 56m 53s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 17m 15s.xml">
-      <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 22h 58m 01s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 17m 16s.xml">
-      <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 23h 08m 30s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 17m 18s.xml">
-      <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 23h 08m 37s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
-    <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 18m 15s.xml">
-      <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
+    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 23h 09m 15s.xml">
+      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4438000" />
+    <option name="totallyTimeSpent" value="9049000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -324,17 +322,6 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php</url>
-          <line>61</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="breakpointCondition">
@@ -385,13 +372,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/composer.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="702">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnvParserInterface.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -413,13 +393,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
@@ -427,14 +400,23 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php">
+    <entry file="file://$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="62" selection-start-line="62" selection-end-line="62" />
+        <state relative-caret-position="-674">
+          <caret line="19" column="56" lean-forward="true" selection-start-line="19" selection-start-column="56" selection-end-line="19" selection-end-column="56" />
           <folding>
-            <element signature="e#206#1330#0#PHP" expanded="true" />
-            <element signature="e#1336#1527#0#PHP" expanded="true" />
+            <element signature="e#438#514#0#PHP" expanded="true" />
+            <element signature="e#603#731#0#PHP" expanded="true" />
+            <element signature="e#752#826#0#PHP" expanded="true" />
+            <element signature="e#914#1038#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/composer.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="30" column="4" lean-forward="true" selection-start-line="30" selection-start-column="4" selection-end-line="30" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -445,17 +427,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="19" lean-forward="true" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="31" column="38" lean-forward="true" selection-start-line="31" selection-start-column="38" selection-end-line="31" selection-end-column="38" />
+          <folding>
+            <element signature="e#40#86#0#PHP" expanded="true" />
+            <element signature="e#1336#1527#0#PHP" expanded="true" />
+            <element signature="e#1753#2256#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnvParser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="364">
-          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        <state relative-caret-position="283">
+          <caret line="163" column="42" selection-start-line="163" selection-start-column="42" selection-end-line="163" selection-end-column="42" />
           <folding>
+            <element signature="e#58#104#0#PHP" expanded="true" />
             <element signature="e#808#1239#0#PHP" expanded="true" />
-            <element signature="e#2343#3180#0#PHP" expanded="true" />
-            <element signature="e#3342#5070#0#PHP" expanded="true" />
-            <element signature="e#5206#5531#0#PHP" expanded="true" />
-            <element signature="e#6424#6496#0#PHP" expanded="true" />
-            <element signature="e#6502#6604#0#PHP" expanded="true" />
+            <element signature="e#1435#2113#0#PHP" expanded="true" />
+            <element signature="e#2286#3411#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

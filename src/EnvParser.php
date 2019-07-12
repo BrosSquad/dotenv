@@ -58,7 +58,7 @@ class EnvParser implements Tokens, EnvParserInterface
 
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      *
      * @param bool $raw
      *
@@ -72,11 +72,13 @@ class EnvParser implements Tokens, EnvParserInterface
         $this->handler->sharedLock();
 
         $envs = [];
+
         while (($c = $this->handler->fgetc()) !== false) {
+            $column = 0;
             // Handling Comments, Empty lines and leading spaces
             if ($c === self::COMMENT) while (($c = $this->handler->fgetc()) !== self::NEW_LINE) continue;
             if ($c === self::NEW_LINE || $c === self::CARRIAGE_RETURN || $c === self::SPACE) continue;
-            $envs[$this->extractName($c)] = $this->extractValue($envs, $raw);
+            $envs[$this->extractName($c, $column)] = $this->extractValue($envs, $raw, $column);
         }
 
         $this->envs = $envs;
@@ -86,11 +88,12 @@ class EnvParser implements Tokens, EnvParserInterface
 
     /**
      * @param string $startingChar
+     * @param int    $column
      *
      * @return string
      * @throws \Dusan\DotEnv\Exceptions\DotEnvSyntaxError
      */
-    private function extractName(string $startingChar): string
+    private function extractName(string $startingChar, int & $column): string
     {
         $key = $startingChar;
         while (($c = $this->handler->fgetc()) !== self::EQUALS) {
@@ -101,28 +104,42 @@ class EnvParser implements Tokens, EnvParserInterface
                 }
                 if ($c === self::EQUALS) break;
                 else {
-                    throw new DotEnvSyntaxError('Spaces are now allowed in env variable name, LINE = ' . $this->handler->key());
+                    $error = new DotEnvSyntaxError('Spaces are now allowed in env variable name');
+                    $error->setEnvLine($this->handler->key());
+                    $error->setColumn($column);
+                    throw $error;
                 }
-            };
-            if ($c === self::CARRIAGE_RETURN || $c === self::NEW_LINE || $c === self::COMMENT)
-                throw new DotEnvSyntaxError('Error on line ' . $this->handler->key());
+            }
+            if ($c === self::CARRIAGE_RETURN || $c === self::NEW_LINE || $c === self::COMMENT) {
+                $error = new DotEnvSyntaxError('Unexpected end of line');
+                $error->setEnvLine($this->handler->key());
+                $error->setColumn($column);
+                throw $error;
+            }
             $key .= $c;
+            $column++;
         }
         return $key;
     }
 
     /**
+     * Parses the individual value from the .env file
+     *
      * @param array $envs
      * @param bool  $raw
+     * @param int   $column
      *
      * @return string
      * @throws \Dusan\DotEnv\Exceptions\EnvVariableNotFound
      */
-    private function extractValue(array $envs, bool $raw): string
+    private function extractValue(array $envs, bool $raw, int & $column): string
     {
         $value = '';
         // Trimming the leading spaces of the value
-        while (($c = $this->handler->fgetc()) === self::SPACE) continue;
+        while (($c = $this->handler->fgetc()) === self::SPACE) {
+            $column++;
+            continue;
+        };
         $this->handler->fseek($this->handler->ftell() - 1);
 
         // Handling Multiline values
@@ -135,21 +152,26 @@ class EnvParser implements Tokens, EnvParserInterface
                 } else {
                     $value .= $c;
                 }
+                $column++;
             }
             return $value;
         }
-        // Single line
+        // Handling Single line values
         while (($c = $this->handler->fgetc()) !== false) {
-            if($c === self::CARRIAGE_RETURN) break;
-            if($c === self::NEW_LINE) break;
+            if ($c === self::CARRIAGE_RETURN) break;
+            if ($c === self::NEW_LINE) break;
             // Every space character will be ignored
-            if ($c === self::SPACE) continue;
+            if ($c === self::SPACE) break;
             // If comment is found at the end of value it will be ignored
             if ($c === self::COMMENT)
-                // Just moving the file pointer to the \r or \n
-                while (($c = $this->handler->fgetc()) !== false && $c !== self::NEW_LINE) continue;
-            // Appending the read value to the temporary handler
-            else $value .= $c;
+                // Just moving the file pointer to the or \n
+                while (($c = $this->handler->fgetc()) !== false && $c !== self::NEW_LINE) {
+                    $column++;
+                    continue;
+                }
+            else
+                $value .= $c;
+            $column++;
         }
         return $value;
     }

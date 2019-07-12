@@ -33,7 +33,7 @@ class EnvParserTest extends TestCase
               is multi line
 ', $array['MULTI_LINE']);
         } catch (DotEnvSyntaxError $e) {
-            $this->fail($e->getMessage());
+            $this->fail(sprintf("%s %d %d", $e->getMessage(), $e->getEnvLine(), $e->getColumn()));
         } catch (Exception $e) {
             $this->fail($e->getMessage());
         }

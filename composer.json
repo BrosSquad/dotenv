@@ -1,43 +1,44 @@
 {
-    "name": "dusan/dotenv",
-    "description": "Env Parser for PhpMvc Framework",
-    "authors": [
-        {
-            "name": "Dusan Malusev",
-            "email": "dusan.998@outlook.com"
-        }
+  "name": "dusan/dotenv",
+  "description": "Env Parser for PhpMvc Framework",
+  "authors": [
+    {
+      "name": "Dusan Malusev",
+      "email": "dusan.998@outlook.com"
+    }
+  ],
+  "autoload": {
+    "files": [
+      "src/functions.php"
     ],
-    "autoload": {
-        "files": [
-            "src/functions.php"
-        ],
-        "psr-4": {
-            "Dusan\\DotEnv\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "files": [
-            "src/functions.php"
-        ],
-        "psr-4": {
-            "Dusan\\DotEnv\\Tests\\": "tests/"
-        }
-    },
-    "type": "library",
-    "minimum-stability": "stable",
-    "require": {
-        "dusan/php-mvc-file": "1.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.1",
-        "codedungeon/phpunit-result-printer": "^0.26.2"
-    },
-    "license": "GPL-2.0",
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/malusev998/PhpMvc-File.git",
-            "branch": "master"
-        }
-    ]
+    "psr-4": {
+      "Dusan\\DotEnv\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "files": [
+      "src/functions.php"
+    ],
+    "psr-4": {
+      "Dusan\\DotEnv\\Tests\\": "tests/"
+    }
+  },
+  "type": "library",
+  "minimum-stability": "stable",
+  "require": {
+    "dusan/php-mvc-file": "1.0",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^8.1",
+    "codedungeon/phpunit-result-printer": "^0.26.2"
+  },
+  "license": "GPL-2.0",
+  "repositories": [
+    {
+      "type": "git",
+      "url": "https://github.com/malusev998/PhpMvc-File.git",
+      "branch": "master"
+    }
+  ]
 }
