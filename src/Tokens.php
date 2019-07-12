@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dusan\DotEnv;
+namespace BrosSquad\DotEnv;
 
 /**
  * ENV Tokens
  * This interfaces holds the tokens used in lexical process
  *
- * @package Dusan\DotEnv
+ * @package BrosSquad\DotEnv
  */
 interface Tokens
 {

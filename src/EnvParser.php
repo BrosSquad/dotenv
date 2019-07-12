@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Dusan\DotEnv;
+namespace BrosSquad\DotEnv;
 
-use Dusan\DotEnv\Exceptions\DotEnvSyntaxError;
-use Dusan\DotEnv\Exceptions\EnvNotParsed;
-use Dusan\DotEnv\Exceptions\EnvVariableNotFound;
+use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
+use BrosSquad\DotEnv\Exceptions\EnvNotParsed;
+use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
 use Dusan\PhpMvc\File\File;
 use Exception;
 
@@ -91,7 +91,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param int    $column
      *
      * @return string
-     * @throws \Dusan\DotEnv\Exceptions\DotEnvSyntaxError
+     * @throws \BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError
      */
     private function extractName(string $startingChar, int & $column): string
     {
@@ -130,7 +130,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param int   $column
      *
      * @return string
-     * @throws \Dusan\DotEnv\Exceptions\EnvVariableNotFound
+     * @throws \BrosSquad\DotEnv\Exceptions\EnvVariableNotFound
      */
     private function extractValue(array $envs, bool $raw, int & $column): string
     {
@@ -180,7 +180,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param array $envs
      *
      * @return mixed
-     * @throws \Dusan\DotEnv\Exceptions\EnvVariableNotFound
+     * @throws \BrosSquad\DotEnv\Exceptions\EnvVariableNotFound
      */
     private function interpolation(array $envs)
     {
@@ -198,7 +198,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * Loads ENVs into $_ENV Super global variable
      *
      * @return void
-     * @throws \Dusan\DotEnv\Exceptions\EnvNotParsed
+     * @throws \BrosSquad\DotEnv\Exceptions\EnvNotParsed
      */
     public function loadIntoENV(): void
     {
@@ -216,7 +216,7 @@ class EnvParser implements Tokens, EnvParserInterface
      *
      * @inheritDoc
      * @return void
-     * @throws \Dusan\DotEnv\Exceptions\EnvNotParsed
+     * @throws \BrosSquad\DotEnv\Exceptions\EnvNotParsed
      */
     public function loadUsingPutEnv(): void
     {

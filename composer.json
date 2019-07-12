@@ -12,7 +12,7 @@
       "src/functions.php"
     ],
     "psr-4": {
-      "Dusan\\DotEnv\\": "src/"
+      "BrosSquad\\DotEnv\\": "src/"
     }
   },
   "autoload-dev": {
@@ -20,7 +20,7 @@
       "src/functions.php"
     ],
     "psr-4": {
-      "Dusan\\DotEnv\\Tests\\": "tests/"
+      "BrosSquad\\DotEnv\\Tests\\": "tests/"
     }
   },
   "type": "library",

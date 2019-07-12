@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Dusan\DotEnv\Exceptions;
+namespace BrosSquad\DotEnv\Exceptions;
 
 
 use Exception;

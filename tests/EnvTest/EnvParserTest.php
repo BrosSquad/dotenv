@@ -1,11 +1,11 @@
 <?php
 
 
-namespace Dusan\DotEnv\Tests;
+namespace BrosSquad\DotEnv\Tests;
 
 
-use Dusan\DotEnv\Exceptions\DotEnvSyntaxError;
-use Dusan\DotEnv\EnvParser;
+use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
+use BrosSquad\DotEnv\EnvParser;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
