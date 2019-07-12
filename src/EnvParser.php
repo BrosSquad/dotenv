@@ -69,9 +69,6 @@ class EnvParser implements Tokens, EnvParserInterface
      */
     public function parse(bool $raw = false): void
     {
-        if (is_null($this->handler)) {
-            throw new Exception('setFile method must be called before the parse');
-        }
         $this->handler->sharedLock();
 
         $envs = [];

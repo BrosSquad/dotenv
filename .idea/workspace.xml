@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="51a56bd7-56f5-4adf-9de8-42b1220c4f36" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/EnvParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnvParser.php" afterDir="false" />
-    </list>
+    <list default="true" id="51a56bd7-56f5-4adf-9de8-42b1220c4f36" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,14 +29,27 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env.space.error">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/EnvParser.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="143" column="22" selection-start-line="143" selection-start-column="22" selection-end-line="143" selection-end-column="22" />
+            <state relative-caret-position="364">
+              <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
               <folding>
-                <element signature="e#1433#2199#0#PHP" expanded="true" />
+                <element signature="e#808#1239#0#PHP" expanded="true" />
                 <element signature="e#2343#3180#0#PHP" expanded="true" />
+                <element signature="e#3342#5070#0#PHP" expanded="true" />
+                <element signature="e#5206#5531#0#PHP" expanded="true" />
+                <element signature="e#6424#6496#0#PHP" expanded="true" />
+                <element signature="e#6502#6604#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -243,14 +254,11 @@
       <updated>1559597724028</updated>
       <workItem from="1559597725494" duration="2363000" />
       <workItem from="1559602585622" duration="39000" />
-      <workItem from="1562931971079" duration="1917000" />
+      <workItem from="1562931971079" duration="2036000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 14h 09m 21s.xml">
-      <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="EnvParserTest_test_env_parser_(1) - 2019.07.12 at 14h 09m 57s.xml">
       <configuration name="EnvParserTest.test_env_parser (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
@@ -278,9 +286,12 @@
     <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 17m 18s.xml">
       <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="EnvParserTest_test_interpolation_(1) - 2019.07.12 at 14h 18m 15s.xml">
+      <configuration name="EnvParserTest.test_interpolation (1)" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4319000" />
+    <option name="totallyTimeSpent" value="4438000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -295,14 +306,14 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32756326" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.39946738" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39946738" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
       <window_info anchor="bottom" id="Version Control" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.3288948" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32756326" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Json Parser" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -395,13 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env.space.error">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="7" column="8" lean-forward="true" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env.interpolation">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
@@ -434,13 +438,24 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/EnvTest/.env.space.error">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="8" column="22" lean-forward="true" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/EnvParser.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="143" column="22" selection-start-line="143" selection-start-column="22" selection-end-line="143" selection-end-column="22" />
+        <state relative-caret-position="364">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
           <folding>
-            <element signature="e#1433#2199#0#PHP" expanded="true" />
+            <element signature="e#808#1239#0#PHP" expanded="true" />
             <element signature="e#2343#3180#0#PHP" expanded="true" />
+            <element signature="e#3342#5070#0#PHP" expanded="true" />
+            <element signature="e#5206#5531#0#PHP" expanded="true" />
+            <element signature="e#6424#6496#0#PHP" expanded="true" />
+            <element signature="e#6502#6604#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
