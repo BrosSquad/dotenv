@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Dusan\PhpMvc\Env\Exceptions;
+namespace Dusan\DotEnv\Exceptions;
 
 
 use Exception;

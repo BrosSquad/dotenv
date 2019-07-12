@@ -1,7 +1,8 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Dusan\PhpMvc\Env;
+namespace Dusan\DotEnv;
 
 
 interface EnvParserInterface

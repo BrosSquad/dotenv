@@ -1,11 +1,12 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Dusan\PhpMvc\Env;
+namespace Dusan\DotEnv;
 
-use Dusan\PhpMvc\Env\Exceptions\DotEnvSyntaxError;
-use Dusan\PhpMvc\Env\Exceptions\EnvNotParsed;
-use Dusan\PhpMvc\Env\Exceptions\EnvVariableNotFound;
+use Dusan\DotEnv\Exceptions\DotEnvSyntaxError;
+use Dusan\DotEnv\Exceptions\EnvNotParsed;
+use Dusan\DotEnv\Exceptions\EnvVariableNotFound;
 use Dusan\PhpMvc\File\File;
 use Exception;
 
@@ -90,7 +91,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param string $startingChar
      *
      * @return string
-     * @throws \Dusan\PhpMvc\Env\Exceptions\DotEnvSyntaxError
+     * @throws \Dusan\DotEnv\Exceptions\DotEnvSyntaxError
      */
     private function extractName(string $startingChar): string
     {
@@ -118,15 +119,20 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param bool  $raw
      *
      * @return string
-     * @throws \Dusan\PhpMvc\Env\Exceptions\EnvVariableNotFound
+     * @throws \Dusan\DotEnv\Exceptions\EnvVariableNotFound
      */
     private function extractValue(array $envs, bool $raw): string
     {
         $value = '';
         // Trimming the leading spaces of the value
         while (($c = $this->handler->fgetc()) === self::SPACE) continue;
+        $this->handler->fseek($this->handler->ftell() - 1);
+//        if (($c = $this->handler->fgetc()) === self::CARRIAGE_RETURN || ($c = $this->handler->fgetc()) === self::NEW_LINE) {
+//            return $value;
+//        }
         // Handling Multiline values
         if ($c === self::MULTI_LINE_START) {
+            $this->handler->fseek($this->handler->ftell() + 1);
             while (($c = $this->handler->fgetc()) !== false && $c !== self::MULTI_LINE_STOP) {
                 // Handle the interpolation
                 if ($c === self::INTERPOLATION_INDICATOR && ($c = $this->handler->fgetc()) === self::INTERPOLATION_START && !$raw) {
@@ -137,10 +143,14 @@ class EnvParser implements Tokens, EnvParserInterface
             }
         } else {
             // Current value of $c must be appended first in non multiline value
-            $value .= $c;
+//            if($c === self::CARRIAGE_RETURN) return $value;
+//            if($c === self::NEW_LINE) return $value;
+//            $value .= $c;
 
             // Single line values in env
-            while (($c = $this->handler->fgetc()) !== false && $c !== self::CARRIAGE_RETURN && $c !== self::NEW_LINE) {
+            while (($c = $this->handler->fgetc()) !== false) {
+                if($c === self::CARRIAGE_RETURN) break;
+                if($c === self::NEW_LINE) break;
                 // Every space character will be ignored
                 if ($c === self::SPACE) continue;
                 // If comment is found at the end of value it will be ignored
@@ -158,7 +168,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param array $envs
      *
      * @return mixed
-     * @throws \Dusan\PhpMvc\Env\Exceptions\EnvVariableNotFound
+     * @throws \Dusan\DotEnv\Exceptions\EnvVariableNotFound
      */
     private function interpolation(array $envs)
     {
@@ -176,7 +186,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * Loads ENVs into $_ENV Super global variable
      *
      * @return void
-     * @throws \Dusan\PhpMvc\Env\Exceptions\EnvNotParsed
+     * @throws \Dusan\DotEnv\Exceptions\EnvNotParsed
      */
     public function loadIntoENV(): void
     {
@@ -194,7 +204,7 @@ class EnvParser implements Tokens, EnvParserInterface
      *
      * @inheritDoc
      * @return void
-     * @throws \Dusan\PhpMvc\Env\Exceptions\EnvNotParsed
+     * @throws \Dusan\DotEnv\Exceptions\EnvNotParsed
      */
     public function loadUsingPutEnv(): void
     {

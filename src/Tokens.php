@@ -1,13 +1,14 @@
 <?php
+
 declare(strict_types=1);
 
-namespace Dusan\PhpMvc\Env;
+namespace Dusan\DotEnv;
 
 /**
  * ENV Tokens
  * This interfaces holds the tokens used in lexical process
  *
- * @package Dusan\PhpMvc\Env
+ * @package Dusan\DotEnv
  */
 interface Tokens
 {
