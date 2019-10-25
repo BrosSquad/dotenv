@@ -15,7 +15,7 @@ class DotEnvSyntaxError extends Exception
     /** @var integer */
     private $column;
 
-    public function __construct($message = "Check your syntax in .env file", $code = 0, Throwable $previous = NULL)
+    public function __construct($message = 'Check your syntax in .env file', $code = 0, Throwable $previous = NULL)
     {
         parent::__construct($message, $code, $previous);
     }

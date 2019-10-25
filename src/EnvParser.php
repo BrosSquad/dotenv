@@ -9,6 +9,7 @@ use BrosSquad\DotEnv\Exceptions\EnvNotParsed;
 use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
 use Dusan\PhpMvc\File\File;
 use Exception;
+use RuntimeException;
 
 class EnvParser implements Tokens, EnvParserInterface
 {
@@ -40,19 +41,19 @@ class EnvParser implements Tokens, EnvParserInterface
      *
      * @param string $file
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(string $file)
     {
         $this->handler = new File($file);
         if ($this->handler === NULL) {
-            throw new Exception('File could not be opened');
+            throw new RuntimeException('File could not be opened');
         }
         if (!$this->handler->isFile()) {
-            throw new Exception($file . ' is not a file');
+            throw new RuntimeException($file . ' is not a file');
         }
         if (!$this->handler->isReadable()) {
-            throw new Exception($file . ' is not readable');
+            throw new RuntimeException($file . ' is not readable');
         }
     }
 
@@ -65,7 +66,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @return void
      * @throws DotEnvSyntaxError
      * @throws EnvVariableNotFound
-     * @throws \Exception
+     * @throws Exception
      */
     public function parse(bool $raw = false): void
     {
@@ -76,8 +77,14 @@ class EnvParser implements Tokens, EnvParserInterface
         while (($c = $this->handler->fgetc()) !== false) {
             $column = 0;
             // Handling Comments, Empty lines and leading spaces
-            if ($c === self::COMMENT) while (($c = $this->handler->fgetc()) !== self::NEW_LINE) continue;
-            if ($c === self::NEW_LINE || $c === self::CARRIAGE_RETURN || $c === self::SPACE) continue;
+            if ($c === self::COMMENT) {
+                while (($c = $this->handler->fgetc()) !== self::NEW_LINE) {
+                    continue;
+                }
+            }
+            if ($c === self::NEW_LINE || $c === self::CARRIAGE_RETURN || $c === self::SPACE) {
+                continue;
+            }
             $envs[$this->extractName($c, $column)] = $this->extractValue($envs, $raw, $column);
         }
 
@@ -88,10 +95,10 @@ class EnvParser implements Tokens, EnvParserInterface
 
     /**
      * @param string $startingChar
-     * @param int    $column
+     * @param int $column
      *
      * @return string
-     * @throws \BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError
+     * @throws DotEnvSyntaxError
      */
     private function extractName(string $startingChar, int & $column): string
     {
@@ -126,11 +133,11 @@ class EnvParser implements Tokens, EnvParserInterface
      * Parses the individual value from the .env file
      *
      * @param array $envs
-     * @param bool  $raw
-     * @param int   $column
+     * @param bool $raw
+     * @param int $column
      *
      * @return string
-     * @throws \BrosSquad\DotEnv\Exceptions\EnvVariableNotFound
+     * @throws EnvVariableNotFound
      */
     private function extractValue(array $envs, bool $raw, int & $column): string
     {
@@ -147,7 +154,7 @@ class EnvParser implements Tokens, EnvParserInterface
             $this->handler->fseek($this->handler->ftell() + 1);
             while (($c = $this->handler->fgetc()) !== false && $c !== self::MULTI_LINE_STOP) {
                 // Handle the interpolation
-                if ($c === self::INTERPOLATION_INDICATOR && ($c = $this->handler->fgetc()) === self::INTERPOLATION_START && !$raw) {
+                if (!$raw && $c === self::INTERPOLATION_INDICATOR && ($c = $this->handler->fgetc()) === self::INTERPOLATION_START) {
                     $value .= $this->interpolation($envs);
                 } else {
                     $value .= $c;
@@ -158,19 +165,26 @@ class EnvParser implements Tokens, EnvParserInterface
         }
         // Handling Single line values
         while (($c = $this->handler->fgetc()) !== false) {
-            if ($c === self::CARRIAGE_RETURN) break;
-            if ($c === self::NEW_LINE) break;
+            if ($c === self::CARRIAGE_RETURN) {
+                break;
+            }
+            if ($c === self::NEW_LINE) {
+                break;
+            }
             // Every space character will be ignored
-            if ($c === self::SPACE) break;
+            if ($c === self::SPACE) {
+                break;
+            }
             // If comment is found at the end of value it will be ignored
-            if ($c === self::COMMENT)
+            if ($c === self::COMMENT) {
                 // Just moving the file pointer to the or \n
                 while (($c = $this->handler->fgetc()) !== false && $c !== self::NEW_LINE) {
                     $column++;
                     continue;
                 }
-            else
+            } else {
                 $value .= $c;
+            }
             $column++;
         }
         return $value;
@@ -180,7 +194,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param array $envs
      *
      * @return mixed
-     * @throws \BrosSquad\DotEnv\Exceptions\EnvVariableNotFound
+     * @throws EnvVariableNotFound
      */
     private function interpolation(array $envs)
     {
@@ -198,7 +212,7 @@ class EnvParser implements Tokens, EnvParserInterface
      * Loads ENVs into $_ENV Super global variable
      *
      * @return void
-     * @throws \BrosSquad\DotEnv\Exceptions\EnvNotParsed
+     * @throws EnvNotParsed
      */
     public function loadIntoENV(): void
     {
@@ -216,7 +230,7 @@ class EnvParser implements Tokens, EnvParserInterface
      *
      * @inheritDoc
      * @return void
-     * @throws \BrosSquad\DotEnv\Exceptions\EnvNotParsed
+     * @throws EnvNotParsed
      */
     public function loadUsingPutEnv(): void
     {
@@ -238,5 +252,27 @@ class EnvParser implements Tokens, EnvParserInterface
     {
         unset($this->handler);
         $this->handler = NULL;
+    }
+
+    /**
+     * @param string $envName
+     * @param string $value
+     * @param bool $shouldQuote
+     * @return int
+     * @throws DotEnvSyntaxError
+     * @throws EnvVariableNotFound
+     */
+    public function write(string $envName, string $value, bool $shouldQuote = false): int
+    {
+        if(!$this->isParsed) {
+            $this->parse();
+        }
+        if($shouldQuote === true) {
+            $value = '"' . $value . '"';
+        }
+
+        $this->envs[$envName] = $value;
+
+        return $this->handler->writeArray($this->envs);
     }
 }

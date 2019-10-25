@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace BrosSquad\DotEnv;
 
 
+use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
+use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
+
 interface EnvParserInterface
 {
     /**
@@ -32,4 +35,14 @@ interface EnvParserInterface
      * @return void
      */
     public function loadUsingPutEnv(): void;
+
+    /**
+     * @param string $envName
+     * @param string $value
+     * @param bool $shouldQuote
+     * @return int
+     * @throws DotEnvSyntaxError
+     * @throws EnvVariableNotFound
+     */
+    public function write(string $envName, string $value, bool $shouldQuote = false): int;
 }

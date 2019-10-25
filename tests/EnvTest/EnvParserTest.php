@@ -6,12 +6,14 @@ namespace BrosSquad\DotEnv\Tests;
 
 use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
 use BrosSquad\DotEnv\EnvParser;
+use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
 use Exception;
 use PHPUnit\Framework\TestCase;
 
 class EnvParserTest extends TestCase
 {
-    public function test_env_parser()
+
+    public function test_env_parser(): void
     {
 
         try {
@@ -33,27 +35,37 @@ class EnvParserTest extends TestCase
               is multi line
 ', $array['MULTI_LINE']);
         } catch (DotEnvSyntaxError $e) {
-            $this->fail(sprintf("%s %d %d", $e->getMessage(), $e->getEnvLine(), $e->getColumn()));
+            $this->fail(sprintf('%s %d %d', $e->getMessage(), $e->getEnvLine(), $e->getColumn()));
         } catch (Exception $e) {
             $this->fail($e->getMessage());
         }
     }
 
-    public function test_env_with_error()
+    /**
+     * @throws DotEnvSyntaxError
+     * @throws EnvVariableNotFound
+     * @throws Exception
+     */
+    public function test_env_with_error(): void
     {
         $this->expectException(DotEnvSyntaxError::class);
         $parser = new EnvParser(__DIR__ . '/.env-error');
         $parser->parse();
     }
 
-    public function test_env_with_space_error_in_variable_name()
+    /**
+     * @throws DotEnvSyntaxError
+     * @throws EnvVariableNotFound
+     * @throws Exception
+     */
+    public function test_env_with_space_error_in_variable_name(): void
     {
         $this->expectException(DotEnvSyntaxError::class);
         $parser = new EnvParser(__DIR__ . '/.env-error');
         $parser->parse();
     }
 
-    public function test_interpolation()
+    public function test_interpolation(): void
     {
         $expected = 'Test is Interpolated';
         try {
