@@ -22,12 +22,24 @@ class EnvParser implements Tokens, EnvParserInterface
     private $handler;
 
     /**
+     * @var array<integer, string>
+     */
+    private $typeCasters = [
+    ];
+
+
+    /**
+     * @var ValueType
+     */
+    private $typeChecker;
+
+    /**
      * Holder for parsed Environment Variables
      *
      * @internal
      * @var null|array
      */
-    private $envs = NULL;
+    private $envs;
 
     /**
      * Flag that doesn't allows the lexing and paring stages to happen twice
@@ -41,9 +53,11 @@ class EnvParser implements Tokens, EnvParserInterface
      *
      * @param string $file
      *
-     * @throws Exception
+     * @param array $typeCasters
+     * @param ValueType|null $typeChecker
+     * @param bool $emptyStringNull
      */
-    public function __construct(string $file)
+    public function __construct(string $file, ?array $typeCasters = null, ValueType $typeChecker = null, bool $emptyStringNull = true)
     {
         $this->handler = new File($file);
         if ($this->handler === NULL) {
@@ -55,6 +69,16 @@ class EnvParser implements Tokens, EnvParserInterface
         if (!$this->handler->isReadable()) {
             throw new RuntimeException($file . ' is not readable');
         }
+
+        if($typeCasters !== null) {
+            $this->typeCasters = array_merge($this->typeCasters, $typeCasters);
+        }
+        if($typeChecker === null)
+        {
+            $typeChecker = new TypeChecker($emptyStringNull);
+        }
+
+        $this->typeChecker = $typeChecker;
     }
 
 
@@ -109,13 +133,14 @@ class EnvParser implements Tokens, EnvParserInterface
                 while (($c = $this->handler->fgetc()) === self::SPACE) {
                     continue;
                 }
-                if ($c === self::EQUALS) break;
-                else {
-                    $error = new DotEnvSyntaxError('Spaces are now allowed in env variable name');
-                    $error->setEnvLine($this->handler->key());
-                    $error->setColumn($column);
-                    throw $error;
+                if ($c === self::EQUALS) {
+                    break;
                 }
+
+                $error = new DotEnvSyntaxError('Spaces are now allowed in env variable name');
+                $error->setEnvLine($this->handler->key());
+                $error->setColumn($column);
+                throw $error;
             }
             if ($c === self::CARRIAGE_RETURN || $c === self::NEW_LINE || $c === self::COMMENT) {
                 $error = new DotEnvSyntaxError('Unexpected end of line');
@@ -136,17 +161,18 @@ class EnvParser implements Tokens, EnvParserInterface
      * @param bool $raw
      * @param int $column
      *
-     * @return string
+     * @return int|string|float|null
      * @throws EnvVariableNotFound
      */
-    private function extractValue(array $envs, bool $raw, int & $column): string
+    private function extractValue(array $envs, bool $raw, int & $column)
     {
         $value = '';
         // Trimming the leading spaces of the value
         while (($c = $this->handler->fgetc()) === self::SPACE) {
             $column++;
             continue;
-        };
+        }
+
         $this->handler->fseek($this->handler->ftell() - 1);
 
         // Handling Multiline values
@@ -187,7 +213,8 @@ class EnvParser implements Tokens, EnvParserInterface
             }
             $column++;
         }
-        return $value;
+
+        return $this->typeChecker->detectValue($value);
     }
 
     /**

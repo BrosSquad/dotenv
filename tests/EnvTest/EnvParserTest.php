@@ -79,4 +79,31 @@ class EnvParserTest extends TestCase
             $this->fail($e->getMessage());
         }
     }
+
+    public function test_casting(): void
+    {
+        try {
+            $parser = new EnvParser(__DIR__ . '/.env.casts');
+            $parser->parse();
+            $envs = $parser->getEnvs();
+            $this->assertIsArray($envs);
+
+            $this->assertIsInt($envs['INTEGERS']);
+            $this->assertIsInt($envs['INT_ZERO']);
+            $this->assertIsBool($envs['BOOLEAN']);
+            $this->assertIsString($envs['STR']);
+            $this->assertIsFloat($envs['FLOATS']);
+            $this->assertIsFloat($envs['FLOAT_ZERO']);
+            $this->assertNull($envs['NULLABLE']);
+            $this->assertNull($envs['UPPERNULL']);
+            $this->assertEquals(123,$envs['INTEGERS']);
+            $this->assertEquals(0,$envs['INT_ZERO']);
+            $this->assertEquals(false,$envs['BOOLEAN']);
+            $this->assertEquals(true,$envs['BOOLEAN_TRUE']);
+            $this->assertEquals(1.65,$envs['FLOATS']);
+            $this->assertEquals(0.0,$envs['FLOAT_ZERO']);
+        } catch (Exception $e) {
+            $this->fail($e->getMessage());
+        }
+    }
 }

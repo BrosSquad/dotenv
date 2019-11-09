@@ -2,12 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="51a56bd7-56f5-4adf-9de8-42b1220c4f36" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/Parser.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TypeChecker.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ValueType.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/EnvTest/.env.casts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.phpunit.result.cache" beforeDir="false" afterPath="$PROJECT_DIR$/.phpunit.result.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/EnvParser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnvParser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/EnvParserInterface.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/EnvParserInterface.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Exceptions/DotEnvSyntaxError.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tokens.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tokens.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -110,13 +112,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.EnvParserTest.test_interpolation (2)">
-    <configuration name="EnvParserTest (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Dusan\DotEnv\Tests\EnvParserTest" file="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" scope="Class" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="PHPUnit.EnvParserTest.test_casting">
     <configuration name="EnvParserTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="BrosSquad\DotEnv\Tests\EnvParserTest" file="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" scope="Class" />
+      <method v="2" />
+    </configuration>
+    <configuration name="EnvParserTest.test_casting" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="BrosSquad\DotEnv\Tests\EnvParserTest" file="$PROJECT_DIR$/tests/EnvTest/EnvParserTest.php" method="test_casting" scope="Method" />
       <method v="2" />
     </configuration>
     <configuration name="EnvParserTest.test_env_parser (1)" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
@@ -133,11 +135,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.EnvParserTest.test_casting" />
         <item itemvalue="PHPUnit.EnvParserTest.test_interpolation (2)" />
         <item itemvalue="PHPUnit.EnvParserTest" />
         <item itemvalue="PHPUnit.EnvParserTest.test_env_parser (1)" />
         <item itemvalue="PHPUnit.EnvParserTest.test_interpolation (1)" />
-        <item itemvalue="PHPUnit.EnvParserTest (1)" />
       </list>
     </recent_temporary>
   </component>
@@ -155,6 +157,7 @@
       <workItem from="1559602585622" duration="39000" />
       <workItem from="1562931971079" duration="7851000" />
       <workItem from="1571987777025" duration="673000" />
+      <workItem from="1573332442746" duration="6658000" />
     </task>
     <servers />
   </component>
@@ -166,7 +169,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

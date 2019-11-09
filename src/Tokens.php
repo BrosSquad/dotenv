@@ -12,16 +12,16 @@ namespace BrosSquad\DotEnv;
  */
 interface Tokens
 {
-    const EQUALS = '=';
-    const COMMENT = '#';
-    const MULTI_LINE_START = '"';
-    const MULTI_LINE_STOP = '"';
-    const SPACE = ' ';
-    const NEW_LINE = "\n";
-    const TAB = "\t";
-    const CARRIAGE_RETURN = "\r";
+    public const EQUALS = '=';
+    public const COMMENT = '#';
+    public const MULTI_LINE_START = '"';
+    public const MULTI_LINE_STOP = '"';
+    public const SPACE = ' ';
+    public const NEW_LINE = "\n";
+    public const TAB = "\t";
+    public const CARRIAGE_RETURN = "\r";
 
-    const INTERPOLATION_INDICATOR = '$';
-    const INTERPOLATION_START = '{';
-    const INTERPOLATION_END = '}';
+    public const INTERPOLATION_INDICATOR = '$';
+    public const INTERPOLATION_START = '{';
+    public const INTERPOLATION_END = '}';
 }
