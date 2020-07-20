@@ -1,15 +1,15 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace BrosSquad\DotEnv;
 
-use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
-use BrosSquad\DotEnv\Exceptions\EnvNotParsed;
-use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
-use Dusan\PhpMvc\File\File;
 use Exception;
 use RuntimeException;
+use Dusan\PhpMvc\File\File;
+use BrosSquad\DotEnv\Exceptions\EnvNotParsed;
+use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
+use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
 
 class EnvParser implements Tokens, EnvParserInterface
 {
@@ -19,19 +19,12 @@ class EnvParser implements Tokens, EnvParserInterface
      * @internal
      * @var File|NULL
      */
-    private $handler;
-
-    /**
-     * @var array<integer, string>
-     */
-    private $typeCasters = [
-    ];
-
+    private ?File $handler;
 
     /**
      * @var ValueType
      */
-    private $typeChecker;
+    private ValueType $typeChecker;
 
     /**
      * Holder for parsed Environment Variables
@@ -39,42 +32,40 @@ class EnvParser implements Tokens, EnvParserInterface
      * @internal
      * @var null|array
      */
-    private $envs;
+    private ?array $envs;
 
     /**
      * Flag that doesn't allows the lexing and paring stages to happen twice
      *
      * @var bool
      */
-    private $isParsed = false;
+    private bool $isParsed = false;
 
     /**
      * EnvParser constructor.
      *
-     * @param string $file
+     * @param  string  $file
      *
-     * @param array $typeCasters
-     * @param ValueType|null $typeChecker
-     * @param bool $emptyStringNull
+     * @param  ValueType|null  $typeChecker
+     * @param  bool  $emptyStringNull
      */
-    public function __construct(string $file, ?array $typeCasters = null, ValueType $typeChecker = null, bool $emptyStringNull = true)
-    {
+    public function __construct(
+        string $file,
+        ValueType $typeChecker = null,
+        bool $emptyStringNull = true
+    ) {
         $this->handler = new File($file);
-        if ($this->handler === NULL) {
+        if ($this->handler === null) {
             throw new RuntimeException('File could not be opened');
         }
         if (!$this->handler->isFile()) {
-            throw new RuntimeException($file . ' is not a file');
+            throw new RuntimeException($file.' is not a file');
         }
         if (!$this->handler->isReadable()) {
-            throw new RuntimeException($file . ' is not readable');
+            throw new RuntimeException($file.' is not readable');
         }
 
-        if($typeCasters !== null) {
-            $this->typeCasters = array_merge($this->typeCasters, $typeCasters);
-        }
-        if($typeChecker === null)
-        {
+        if ($typeChecker === null) {
             $typeChecker = new TypeChecker($emptyStringNull);
         }
 
@@ -85,12 +76,13 @@ class EnvParser implements Tokens, EnvParserInterface
     /**
      * {@inheritDoc}
      *
-     * @param bool $raw
-     *
-     * @return void
      * @throws DotEnvSyntaxError
      * @throws EnvVariableNotFound
      * @throws Exception
+     *
+     * @param  bool  $raw
+     *
+     * @return void
      */
     public function parse(bool $raw = false): void
     {
@@ -118,13 +110,15 @@ class EnvParser implements Tokens, EnvParserInterface
     }
 
     /**
-     * @param string $startingChar
-     * @param int $column
+     * @throws DotEnvSyntaxError
+     *
+     * @param  int  $column
+     *
+     * @param  string  $startingChar
      *
      * @return string
-     * @throws DotEnvSyntaxError
      */
-    private function extractName(string $startingChar, int & $column): string
+    private function extractName(string $startingChar, int &$column): string
     {
         $key = $startingChar;
         while (($c = $this->handler->fgetc()) !== self::EQUALS) {
@@ -157,16 +151,19 @@ class EnvParser implements Tokens, EnvParserInterface
     /**
      * Parses the individual value from the .env file
      *
-     * @param array $envs
-     * @param bool $raw
-     * @param int $column
+     * @throws EnvVariableNotFound
+     *
+     * @param  bool  $raw
+     * @param  int  $column
+     *
+     * @param  array  $envs
      *
      * @return int|string|float|null
-     * @throws EnvVariableNotFound
      */
-    private function extractValue(array $envs, bool $raw, int & $column)
+    private function extractValue(array $envs, bool $raw, int &$column)
     {
         $value = '';
+        $shouldBeString = false;
         // Trimming the leading spaces of the value
         while (($c = $this->handler->fgetc()) === self::SPACE) {
             $column++;
@@ -177,10 +174,13 @@ class EnvParser implements Tokens, EnvParserInterface
 
         // Handling Multiline values
         if ($c === self::MULTI_LINE_START) {
+            $shouldBeString = true;
             $this->handler->fseek($this->handler->ftell() + 1);
             while (($c = $this->handler->fgetc()) !== false && $c !== self::MULTI_LINE_STOP) {
                 // Handle the interpolation
-                if (!$raw && $c === self::INTERPOLATION_INDICATOR && ($c = $this->handler->fgetc()) === self::INTERPOLATION_START) {
+                if (!$raw &&
+                    $c === self::INTERPOLATION_INDICATOR &&
+                    ($c = $this->handler->fgetc()) === self::INTERPOLATION_START) {
                     $value .= $this->interpolation($envs);
                 } else {
                     $value .= $c;
@@ -214,14 +214,15 @@ class EnvParser implements Tokens, EnvParserInterface
             $column++;
         }
 
-        return $this->typeChecker->detectValue($value);
+        return $this->typeChecker->detectValue($value, $shouldBeString);
     }
 
     /**
-     * @param array $envs
+     * @throws EnvVariableNotFound
+     *
+     * @param  array  $envs
      *
      * @return mixed
-     * @throws EnvVariableNotFound
      */
     private function interpolation(array $envs)
     {
@@ -230,7 +231,7 @@ class EnvParser implements Tokens, EnvParserInterface
             $tmp .= $c;
         }
         if (!isset($envs[$tmp])) {
-            throw new EnvVariableNotFound($tmp . ' is not found');
+            throw new EnvVariableNotFound($tmp.' is not found');
         }
         return $envs[$tmp];
     }
@@ -238,8 +239,8 @@ class EnvParser implements Tokens, EnvParserInterface
     /**
      * Loads ENVs into $_ENV Super global variable
      *
-     * @return void
      * @throws EnvNotParsed
+     * @return void
      */
     public function loadIntoENV(): void
     {
@@ -256,8 +257,8 @@ class EnvParser implements Tokens, EnvParserInterface
      * Loads all ENVs using putenv() function
      *
      * @inheritDoc
-     * @return void
      * @throws EnvNotParsed
+     * @return void
      */
     public function loadUsingPutEnv(): void
     {
@@ -278,24 +279,26 @@ class EnvParser implements Tokens, EnvParserInterface
     public function __destruct()
     {
         unset($this->handler);
-        $this->handler = NULL;
+        $this->handler = null;
     }
 
     /**
-     * @param string $envName
-     * @param string $value
-     * @param bool $shouldQuote
-     * @return int
      * @throws DotEnvSyntaxError
      * @throws EnvVariableNotFound
+     *
+     * @param  bool  $shouldQuote
+     * @param  string  $envName
+     * @param  string  $value
+     *
+     * @return int
      */
     public function write(string $envName, string $value, bool $shouldQuote = false): int
     {
-        if(!$this->isParsed) {
+        if (!$this->isParsed) {
             $this->parse();
         }
-        if($shouldQuote === true) {
-            $value = '"' . $value . '"';
+        if ($shouldQuote === true) {
+            $value = '"'.$value.'"';
         }
 
         $this->envs[$envName] = $value;

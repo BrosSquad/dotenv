@@ -6,19 +6,25 @@ namespace BrosSquad\DotEnv;
 
 class TypeChecker implements ValueType
 {
-    private $emptyStringAsNull;
+    private bool $emptyStringAsNull;
 
     public function __construct(bool $emptyStringAsNull)
     {
         $this->emptyStringAsNull = $emptyStringAsNull;
     }
 
-    public function detectValue(string $value)
+    public function detectValue(string $value, bool $shouldBeString)
     {
+        if ($value === '' && $shouldBeString) {
+            return '';
+        }
+
         $toLower = strtolower($value);
 
         // Detecting NULL
-        if (strcmp('null', $toLower) === 0 || ($this->emptyStringAsNull === true && strcmp('', $toLower) === 0)) {
+        if (($value === '' && !$shouldBeString) ||
+            strcmp('null', $toLower) === 0 ||
+            ($this->emptyStringAsNull === true && strcmp('', $toLower) === 0)) {
             return null;
         }
 
@@ -29,7 +35,6 @@ class TypeChecker implements ValueType
 
         // Detecting FLOATS
         $trimmed = ltrim($toLower, '0');
-
 
 
         $casted = (float)$toLower;
@@ -63,7 +68,7 @@ class TypeChecker implements ValueType
             case 'false':
                 return false;
             default:
-                   return null;
+                return null;
         }
     }
 }

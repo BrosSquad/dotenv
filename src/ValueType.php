@@ -12,5 +12,5 @@ interface ValueType
     public const STRING = 'STRING';
     public const BOOLEAN = 'BOOLEAN';
 
-    public function detectValue(string $value);
+    public function detectValue(string $value, bool $shouldBeString);
 }
