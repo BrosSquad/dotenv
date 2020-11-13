@@ -1,12 +1,11 @@
 <?php
 
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace BrosSquad\DotEnv;
 
 use Exception;
 use RuntimeException;
-use Dusan\PhpMvc\File\File;
 use BrosSquad\DotEnv\Exceptions\EnvNotParsed;
 use BrosSquad\DotEnv\Exceptions\DotEnvSyntaxError;
 use BrosSquad\DotEnv\Exceptions\EnvVariableNotFound;
@@ -59,10 +58,10 @@ class EnvParser implements Tokens, EnvParserInterface
             throw new RuntimeException('File could not be opened');
         }
         if (!$this->handler->isFile()) {
-            throw new RuntimeException($file.' is not a file');
+            throw new RuntimeException($file . ' is not a file');
         }
         if (!$this->handler->isReadable()) {
-            throw new RuntimeException($file.' is not readable');
+            throw new RuntimeException($file . ' is not readable');
         }
 
         if ($typeChecker === null) {
@@ -178,9 +177,11 @@ class EnvParser implements Tokens, EnvParserInterface
             $this->handler->fseek($this->handler->ftell() + 1);
             while (($c = $this->handler->fgetc()) !== false && $c !== self::MULTI_LINE_STOP) {
                 // Handle the interpolation
-                if (!$raw &&
+                if (
+                    !$raw &&
                     $c === self::INTERPOLATION_INDICATOR &&
-                    ($c = $this->handler->fgetc()) === self::INTERPOLATION_START) {
+                    ($c = $this->handler->fgetc()) === self::INTERPOLATION_START
+                ) {
                     $value .= $this->interpolation($envs);
                 } else {
                     $value .= $c;
@@ -231,7 +232,7 @@ class EnvParser implements Tokens, EnvParserInterface
             $tmp .= $c;
         }
         if (!isset($envs[$tmp])) {
-            throw new EnvVariableNotFound($tmp.' is not found');
+            throw new EnvVariableNotFound($tmp . ' is not found');
         }
         return $envs[$tmp];
     }
@@ -298,7 +299,7 @@ class EnvParser implements Tokens, EnvParserInterface
             $this->parse();
         }
         if ($shouldQuote === true) {
-            $value = '"'.$value.'"';
+            $value = '"' . $value . '"';
         }
 
         $this->envs[$envName] = $value;
